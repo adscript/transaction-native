@@ -1,14 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-clipboard/clipboard';
 
 import {BankText, Gap, LabelText} from '@components/atoms';
-import {fontFamily, color, dateFormatter} from '@utils/';
-import { numberWithThousandSeparator } from '@utils/';
+import {fontFamily, color, dateFormatter,numberWithThousandSeparator} from '@utils/';
+import { showToast } from '@utils/snackbar';
 
 export default function TransactionDetail({navigation, route}) {
-  console.log('Dirimu', route);
   const {
     id,
     account_number,
@@ -20,9 +19,9 @@ export default function TransactionDetail({navigation, route}) {
     sender_bank,
     remark,
   } = route.params.data;
-
   const copyToClipboard = () => {
     Clipboard.setString(id);
+    showToast('Copied to Clipboard')
   };
 
   return (
@@ -71,7 +70,7 @@ export default function TransactionDetail({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    marginTop: 20,
+    marginTop: Platform.OS === 'ios' ? 50 : 20,
     paddingVertical: 20,
   },
   transactionWrapper: {

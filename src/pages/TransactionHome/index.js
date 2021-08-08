@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import {Gap} from '@components/atoms';
 import {TransactionList, TransactionListSkeleton} from '@components/organisms';
@@ -146,5 +146,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     flex: 1,
+    paddingTop: Platform.OS === 'ios' ? 30 : 0
   },
 });
